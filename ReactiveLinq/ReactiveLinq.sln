@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveLinq", "ReactiveLinq\ReactiveLinq.csproj", "{2C742CC7-9D55-46BA-996A-0029F24881EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{857D9391-0FDB-4411-BC5F-697941C27E26}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs05.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ReactiveLinq\\ReactiveLinq.csproj
+		SccProjectName1 = ReactiveLinq
+		SccLocalPath1 = ReactiveLinq
+		SccProjectUniqueName2 = Sample\\Sample.csproj
+		SccProjectName2 = Sample
+		SccLocalPath2 = Sample
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{857D9391-0FDB-4411-BC5F-697941C27E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{857D9391-0FDB-4411-BC5F-697941C27E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{857D9391-0FDB-4411-BC5F-697941C27E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{857D9391-0FDB-4411-BC5F-697941C27E26}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
