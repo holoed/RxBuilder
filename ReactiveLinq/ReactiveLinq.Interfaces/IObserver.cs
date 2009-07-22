@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 /* ****************************************************************************
  * Copyright (c) Edmondo Pentangelo. 
@@ -13,17 +13,10 @@
 
 #endregion
 
-using System;
-using ReactiveLinq;
-
-namespace Sample
+namespace ReactiveLinq
 {
-    class Program
+    public interface IObserver<T>
     {
-        static void Main(string[] args)
-        {
-            new CSExample().Run();
-            new FSExample().Run();
-        }
+        void OnNext(T value);
     }
 }

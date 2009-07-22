@@ -5,9 +5,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveLinq", "ReactiveLin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{857D9391-0FDB-4411-BC5F-697941C27E26}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSReactiveLinq", "FSReactiveLinq\FSReactiveLinq.fsproj", "{05294CD1-C8EF-43CB-BEAE-85FA5B5D8758}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveLinq.Interfaces", "ReactiveLinq.Interfaces\ReactiveLinq.Interfaces.csproj", "{B4A61E4E-68CD-4E7A-A963-2108953D1583}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs05.codeplex.com/
 		SccLocalPath0 = .
@@ -17,6 +21,12 @@ Global
 		SccProjectUniqueName2 = Sample\\Sample.csproj
 		SccProjectName2 = Sample
 		SccLocalPath2 = Sample
+		SccProjectUniqueName3 = FSReactiveLinq\\FSReactiveLinq.fsproj
+		SccProjectName3 = FSReactiveLinq
+		SccLocalPath3 = FSReactiveLinq
+		SccProjectUniqueName4 = ReactiveLinq.Interfaces\\ReactiveLinq.Interfaces.csproj
+		SccProjectName4 = ReactiveLinq.Interfaces
+		SccLocalPath4 = ReactiveLinq.Interfaces
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +41,14 @@ Global
 		{857D9391-0FDB-4411-BC5F-697941C27E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{857D9391-0FDB-4411-BC5F-697941C27E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{857D9391-0FDB-4411-BC5F-697941C27E26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05294CD1-C8EF-43CB-BEAE-85FA5B5D8758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05294CD1-C8EF-43CB-BEAE-85FA5B5D8758}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05294CD1-C8EF-43CB-BEAE-85FA5B5D8758}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05294CD1-C8EF-43CB-BEAE-85FA5B5D8758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4A61E4E-68CD-4E7A-A963-2108953D1583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4A61E4E-68CD-4E7A-A963-2108953D1583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4A61E4E-68CD-4E7A-A963-2108953D1583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4A61E4E-68CD-4E7A-A963-2108953D1583}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
