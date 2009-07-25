@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveLinq", "ReactiveLinq\ReactiveLinq.csproj", "{2C742CC7-9D55-46BA-996A-0029F24881EB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{857D9391-0FDB-4411-BC5F-697941C27E26}"
-EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSReactiveLinq", "FSReactiveLinq\FSReactiveLinq.fsproj", "{05294CD1-C8EF-43CB-BEAE-85FA5B5D8758}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveLinq.Interfaces", "ReactiveLinq.Interfaces\ReactiveLinq.Interfaces.csproj", "{B4A61E4E-68CD-4E7A-A963-2108953D1583}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveLinq.Tests", "ReactiveLinq.Tests\ReactiveLinq.Tests.csproj", "{274F51EB-1E09-44C7-934F-B79FB543D826}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSReactiveLinq", "CSReactiveLinq\CSReactiveLinq.csproj", "{2C742CC7-9D55-46BA-996A-0029F24881EB}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -15,32 +15,24 @@ Global
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs05.codeplex.com/
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ReactiveLinq\\ReactiveLinq.csproj
-		SccProjectName1 = ReactiveLinq
-		SccLocalPath1 = ReactiveLinq
-		SccProjectUniqueName2 = Sample\\Sample.csproj
-		SccProjectName2 = Sample
-		SccLocalPath2 = Sample
-		SccProjectUniqueName3 = FSReactiveLinq\\FSReactiveLinq.fsproj
-		SccProjectName3 = FSReactiveLinq
-		SccLocalPath3 = FSReactiveLinq
-		SccProjectUniqueName4 = ReactiveLinq.Interfaces\\ReactiveLinq.Interfaces.csproj
-		SccProjectName4 = ReactiveLinq.Interfaces
-		SccLocalPath4 = ReactiveLinq.Interfaces
+		SccProjectUniqueName1 = FSReactiveLinq\\FSReactiveLinq.fsproj
+		SccProjectName1 = FSReactiveLinq
+		SccLocalPath1 = FSReactiveLinq
+		SccProjectUniqueName2 = ReactiveLinq.Interfaces\\ReactiveLinq.Interfaces.csproj
+		SccProjectName2 = ReactiveLinq.Interfaces
+		SccLocalPath2 = ReactiveLinq.Interfaces
+		SccProjectUniqueName3 = ReactiveLinq.Tests\\ReactiveLinq.Tests.csproj
+		SccProjectName3 = ReactiveLinq.Tests
+		SccLocalPath3 = ReactiveLinq.Tests
+		SccProjectUniqueName4 = CSReactiveLinq\\CSReactiveLinq.csproj
+		SccProjectName4 = CSReactiveLinq
+		SccLocalPath4 = CSReactiveLinq
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{857D9391-0FDB-4411-BC5F-697941C27E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{857D9391-0FDB-4411-BC5F-697941C27E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{857D9391-0FDB-4411-BC5F-697941C27E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{857D9391-0FDB-4411-BC5F-697941C27E26}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05294CD1-C8EF-43CB-BEAE-85FA5B5D8758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05294CD1-C8EF-43CB-BEAE-85FA5B5D8758}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05294CD1-C8EF-43CB-BEAE-85FA5B5D8758}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,6 +41,14 @@ Global
 		{B4A61E4E-68CD-4E7A-A963-2108953D1583}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4A61E4E-68CD-4E7A-A963-2108953D1583}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4A61E4E-68CD-4E7A-A963-2108953D1583}.Release|Any CPU.Build.0 = Release|Any CPU
+		{274F51EB-1E09-44C7-934F-B79FB543D826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{274F51EB-1E09-44C7-934F-B79FB543D826}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{274F51EB-1E09-44C7-934F-B79FB543D826}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{274F51EB-1E09-44C7-934F-B79FB543D826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C742CC7-9D55-46BA-996A-0029F24881EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
