@@ -26,9 +26,11 @@ open ReactiveLinq
 //
 //type IObservable<'a> = 
 //    abstract member Subscribe : IObserver<'a> -> IDisposable
+//
+//type IObservableGrouping<'a,'b> =
+//    inherit IObservable<'b>
+//    abstract member Key: 'a with get
     
-// Bind and Return implentations compatible with Linq
-
 let CreateObserver f (next: IObserver<'b>) = { new IObserver<'a> with 
                                                                member o.OnNext(x) = 
                                                                    next.OnNext(f x) }
