@@ -35,12 +35,6 @@
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ReactiveLinq.Interfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <Name>ReactiveLinq.Interfaces</Name>
-      <AssemblyName>ReactiveLinq.Interfaces.dll</AssemblyName>
-      <HintPath>..\ReactiveLinq.Interfaces\bin\Debug\ReactiveLinq.Interfaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -48,6 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LinqEnabler.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReactiveLinq.Interfaces\ReactiveLinq.Interfaces.csproj">
+      <Name>ReactiveLinq.Interfaces</Name>
+      <Project>{b4a61e4e-68cd-4e7a-a963-2108953d1583}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\FSharp\1.0\Microsoft.FSharp.Targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

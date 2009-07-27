@@ -13,10 +13,7 @@
 
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using CSReactiveLinq;
 using ReactiveLinq.Agents;
@@ -34,7 +31,7 @@ namespace ReactiveLinq
 
             var riskList = new List<Risk>();
 
-            Observer.Subscribe(q, riskList.Add);
+            q.Subscribe(riskList.Add);
 
             risks.Tick();
             risks.Tick();
@@ -50,7 +47,7 @@ namespace ReactiveLinq
 
             var list = newListOfType(q);
 
-            Observer.Subscribe(q, list.Add);
+            q.Subscribe(list.Add);
 
             risks.Tick();
             spots.Tick();

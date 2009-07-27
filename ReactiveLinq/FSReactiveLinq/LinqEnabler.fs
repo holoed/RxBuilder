@@ -29,18 +29,18 @@ open ReactiveLinq
     
 // Bind and Return implentations compatible with Linq
 
-let CreateObserver<'a, 'b> f (next: IObserver<'b>) = { new IObserver<'a> with 
+let CreateObserver f (next: IObserver<'b>) = { new IObserver<'a> with 
                                                                member o.OnNext(x) = 
                                                                    next.OnNext(f x) }
                                                                    
-let Return<'a, 'b>(observable: IObservable<'a>, selector) 
+let Map(observable: IObservable<'a>, f) 
                     = { new IObservable<'b> with 
                             member o.Subscribe(observer) =
-                                observable.Subscribe(CreateObserver<'a, 'b> selector observer) }
+                                observable.Subscribe(CreateObserver f observer) }
                                                                      
-let Bind<'a, 'b, 'c>(observable: IObservable<'a>, selector : 'a -> IObservable<'b>, projection) =
+let Bind(observable: IObservable<'a>, selector : 'a -> IObservable<'b>, projection) =
                     
-                    let project (observer:IObserver<'c>) x = CreateObserver<'b, 'c> (projection x) observer
+                    let project (observer:IObserver<'c>) x = CreateObserver (projection x) observer
                                                                  
                     let Subscribe observer = { new IObserver<'a> with 
                                                    member o.OnNext x = 
@@ -54,11 +54,11 @@ let Bind<'a, 'b, 'c>(observable: IObservable<'a>, selector : 'a -> IObservable<'
 
 [<Extension>]
 let Select(observable : IObservable<'a>, selector : Func<'a,'b>) = 
-    Return<'a, 'b>(observable, fun x -> selector.Invoke(x))
+    Map(observable, fun x -> selector.Invoke(x))
      
 [<Extension>]
 let SelectMany(observable : IObservable<'a>, selector : Func<'a, IObservable<'b>>, projection : Func<'a, 'b, 'c>) = 
-    Bind<'a, 'b, 'c>(observable, (fun x -> selector.Invoke(x)), (fun x -> fun y -> projection.Invoke(x, y)))
+    Bind(observable, (fun x -> selector.Invoke(x)), (fun x -> fun y -> projection.Invoke(x, y)))
     
 [<Extension>]
 let GroupBy(source : IObservable<'a>, keySelector : Func<'a, 'b>) =
@@ -84,8 +84,8 @@ let GroupBy(source : IObservable<'a>, keySelector : Func<'a, 'b>) =
                                                f(x) }) }
                                
                                     
-// Utility function to easy subscription
-let Subscribe<'a> (observable : IObservable<'a>)  (action:Action<'a>) =
+[<Extension>]
+let Subscribe(observable : IObservable<'a>)  (action:Action<'a>) =
         let observer = { new IObserver<'a>
                             with member o.OnNext x = action.Invoke x }
         observable.Subscribe(observer)

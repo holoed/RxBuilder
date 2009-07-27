@@ -32,7 +32,7 @@ namespace ReactiveLinq
 
             var riskList = new List<Risk>();
 
-            LinqEnabler.Subscribe(q, riskList.Add);
+            q.Subscribe(riskList.Add);
 
             risks.Tick();
             risks.Tick();
@@ -48,7 +48,7 @@ namespace ReactiveLinq
 
             var list = newListOfType(q);
 
-            LinqEnabler.Subscribe(q, list.Add);
+            q.Subscribe(list.Add);
 
             risks.Tick();
             spots.Tick();
@@ -80,7 +80,7 @@ namespace ReactiveLinq
                     return x => { };
                 };
 
-            LinqEnabler.Subscribe(q, item => LinqEnabler.Subscribe(item.Value, f(item.Key)  ));
+            q.Subscribe(item => item.Value.Subscribe(f(item.Key)  ));
 
             risks.Tick("byUnd", "VOD.L");
             risks.Tick("byUnd", "MSFT");
