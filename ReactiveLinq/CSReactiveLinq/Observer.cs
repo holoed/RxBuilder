@@ -20,7 +20,7 @@ namespace CSReactiveLinq
 {
     public static class Observer
     {
-        public static IObserver<T> Subscribe<T>(IObservable<T> observable, Action<T> action)
+        public static IObserver<T> Subscribe<T>(this IObservable<T> observable, Action<T> action)
         {
             var observer = new Observer<T>(action);
             observable.Subscribe(observer);
