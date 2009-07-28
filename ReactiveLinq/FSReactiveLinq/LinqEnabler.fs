@@ -41,17 +41,23 @@ let Map(observable: IObservable<'a>, f)
                                 observable.Subscribe(CreateObserver f observer) }
                                                                      
 let Bind(observable: IObservable<'a>, selector : 'a -> IObservable<'b>, projection) =
-                    
+ 
                     let project (observer:IObserver<'c>) x = CreateObserver (projection x) observer
-                                                                 
+                       
+                    //TODO: Remove mutable Reference Cell   
+                    let disposableB = ref null
+                                                              
                     let Subscribe observer = { new IObserver<'a> with 
                                                    member o.OnNext x = 
-                                                         //TODO: Add support for IDisposable
-                                                         ignore ((selector x).Subscribe(project observer x)) } 
+                                                         disposableB := ((selector x).Subscribe(project observer x)) } 
                     
                     {  new IObservable<'c> with 
                           member o.Subscribe(observer) =
-                              observable.Subscribe(Subscribe observer) }
+                              let disposableA = observable.Subscribe(Subscribe observer)
+                              { new IDisposable with
+                                    member o.Dispose() =
+                                          disposableA.Dispose()
+                                          disposableB.Value.Dispose() } }
                                      
 
 [<Extension>]

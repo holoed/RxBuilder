@@ -17,8 +17,8 @@ namespace ReactiveLinq.Agents
 {
     public class Risk 
     {
-        public string Aggregation;
-        public string Id;
+        public string Aggregation = "";
+        public string Id = "";
         private readonly double _delta;
 
         public Risk(double delta)

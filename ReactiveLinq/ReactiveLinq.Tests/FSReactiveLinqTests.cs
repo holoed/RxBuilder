@@ -104,5 +104,44 @@ namespace ReactiveLinq
             Assert.AreEqual(1, calledUnd);
             Assert.AreEqual(1, calledPos);
         }
+
+        [Test]
+        public override void Dispose()
+        {
+            var q = from risk in risks
+                    select risk;
+
+            var xs = new List<Risk>();
+
+            Assert.AreEqual(0, xs.Count);
+            using (q.Subscribe(xs.Add))
+            {
+                risks.Tick();
+                Assert.AreEqual(1, xs.Count);
+            }
+            risks.Tick();
+            Assert.AreEqual(1, xs.Count);
+        }
+
+        [Test]
+        public override void DisposeSelectMany()
+        {
+            var q = from risk in risks
+                    from spot in spots
+                    select new {risk, spot};
+
+            var xs = newListOfType(q);
+
+            Assert.AreEqual(0, xs.Count);
+            using (q.Subscribe(xs.Add))
+            {
+                risks.Tick();
+                spots.Tick();
+                Assert.AreEqual(1, xs.Count);
+            }
+            risks.Tick();
+            spots.Tick();
+            Assert.AreEqual(1, xs.Count);
+        }
     }
 }

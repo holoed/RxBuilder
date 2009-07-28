@@ -13,11 +13,7 @@
 
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
 using ReactiveLinq.Agents;
 
 namespace ReactiveLinq
@@ -30,8 +26,10 @@ namespace ReactiveLinq
         public abstract void Select();
         public abstract void SelectMany();
         public abstract void GroupBy();
+        public abstract void Dispose();
+        public abstract void DisposeSelectMany();
 
-        protected List<T> newListOfType<T>(IObservable<T> q)
+        protected static List<T> newListOfType<T>(IObservable<T> q)
         {
             return new List<T>();
         }

@@ -56,7 +56,7 @@ namespace CSReactiveLinq
                 t => { disposableY = _selector(t).Subscribe(new Observer<U>(u => observerV.OnNext(_projector(t, u)))); });
             var disposableX = _p.Subscribe(observerT);
 
-            return new DisposableWrapper(disposableX, disposableY);
+            return new DisposableWrapper(() => disposableX, () => disposableY);
         }
     }
 }

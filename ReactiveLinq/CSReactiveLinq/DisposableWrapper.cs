@@ -19,19 +19,17 @@ namespace CSReactiveLinq
 {
     public class DisposableWrapper : IDisposable
     {
-        private readonly IDisposable _y;
-        private readonly IDisposable _x;
+        private readonly Func<IDisposable>[] _xs;
 
-        public DisposableWrapper(IDisposable x, IDisposable y)
+        public DisposableWrapper(params Func<IDisposable>[] xs)
         {
-            _x = x;
-            _y = y;
+            _xs = xs;
         }
 
         public void Dispose()
         {
-            _x.Dispose();
-            _y.Dispose();
+            foreach (var x in _xs)
+                x().Dispose();
         }
     }
 }

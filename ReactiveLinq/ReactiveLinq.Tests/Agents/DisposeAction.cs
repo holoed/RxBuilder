@@ -15,7 +15,7 @@
 
 using System;
 
-namespace CSReactiveLinq
+namespace ReactiveLinq.Agents
 {
     public class DisposeAction : IDisposable
     {
