@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DisposableWrapper.cs" />
-    <Compile Include="DisposeAction.cs" />
     <Compile Include="ObservableWrapper.cs" />
     <Compile Include="Observer.cs" />
     <Compile Include="ObserverWrapper.cs" />
