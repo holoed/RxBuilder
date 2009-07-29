@@ -94,11 +94,13 @@ namespace ReactiveLinq
             {
                 risks.Tick();
                 spots.Tick();
-                Assert.AreEqual(1, xs.Count);
+                risks.Tick();
+                spots.Tick();
+                Assert.AreEqual(3, xs.Count);
             }
             risks.Tick();
             spots.Tick();
-            Assert.AreEqual(1, xs.Count);
+            Assert.AreEqual(3, xs.Count);
         }
     }
 }
