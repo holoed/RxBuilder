@@ -128,7 +128,7 @@ namespace ReactiveLinq
         {
             var q = from risk in risks
                     from spot in spots
-                    select new {risk, spot};
+                    select new { risk, spot };
 
             var xs = newListOfType(q);
 
@@ -137,11 +137,13 @@ namespace ReactiveLinq
             {
                 risks.Tick();
                 spots.Tick();
-                Assert.AreEqual(1, xs.Count);
+                risks.Tick();
+                spots.Tick();
+                Assert.AreEqual(3, xs.Count);
             }
             risks.Tick();
             spots.Tick();
-            Assert.AreEqual(1, xs.Count);
+            Assert.AreEqual(3, xs.Count);
         }
     }
 }

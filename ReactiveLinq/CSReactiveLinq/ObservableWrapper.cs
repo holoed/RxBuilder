@@ -14,6 +14,8 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using ReactiveLinq;
 
 namespace CSReactiveLinq
@@ -50,13 +52,15 @@ namespace CSReactiveLinq
 
         public IDisposable Subscribe(IObserver<V> observerV)
         {
-            IDisposable disposableY = null;
+            var disposableY = new List<IDisposable>();
 
             var observerT = new Observer<T>(
-                t => { disposableY = _selector(t).Subscribe(new Observer<U>(u => observerV.OnNext(_projector(t, u)))); });
+                t => disposableY.Add(_selector(t).Subscribe(new Observer<U>(u => observerV.OnNext(_projector(t, u))))));
             var disposableX = _p.Subscribe(observerT);
 
-            return new DisposableWrapper(() => disposableX, () => disposableY);
+            return new DisposableWrapper(
+                () => disposableX, 
+                () => new DisposableWrapper(disposableY.Select<IDisposable, Func<IDisposable>>(x => () => x).ToArray()));
         }
     }
 }

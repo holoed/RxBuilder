@@ -16,6 +16,7 @@ namespace FSReactiveLinq
 module LinqEnabler
 
 open System
+open System.Collections.Generic
 open System.Runtime.CompilerServices
 open ReactiveLinq
 
@@ -44,12 +45,12 @@ let Bind(observable: IObservable<'a>, selector : 'a -> IObservable<'b>, projecti
  
                     let project (observer:IObserver<'c>) x = CreateObserver (projection x) observer
                        
-                    //TODO: Remove mutable Reference Cell   
-                    let disposableB = ref null
+                    //TODO: Remove use of mutable list.
+                    let disposableB = new List<IDisposable> ()
                                                               
                     let Subscribe observer = { new IObserver<'a> with 
                                                    member o.OnNext x = 
-                                                         disposableB := ((selector x).Subscribe(project observer x)) } 
+                                                         disposableB.Add ((selector x).Subscribe(project observer x)) } 
                     
                     {  new IObservable<'c> with 
                           member o.Subscribe(observer) =
@@ -57,7 +58,7 @@ let Bind(observable: IObservable<'a>, selector : 'a -> IObservable<'b>, projecti
                               { new IDisposable with
                                     member o.Dispose() =
                                           disposableA.Dispose()
-                                          disposableB.Value.Dispose() } }
+                                          Seq.iter (fun (d:IDisposable) -> d.Dispose()) disposableB } }
                                      
 
 [<Extension>]
