@@ -24,6 +24,8 @@ namespace ReactiveLinq
     [TestFixture]
     public class FSReactiveLinqTests : ReactiveLinqTests
     {
+        private readonly Random _rnd = new Random();
+
         [Test]
         public override void Select()
         {
@@ -82,12 +84,12 @@ namespace ReactiveLinq
 
             q.Subscribe(item => item.Value.Subscribe(f(item.Key)  ));
 
-            risks.Tick("byUnd", "VOD.L");
-            risks.Tick("byUnd", "MSFT");
-            risks.Tick("byPos", "00001");
-            risks.Tick("byPos", "00002");
-            risks.Tick("byUnd", "ORCL");
-            risks.Tick("byPos", "00001");
+            risks.Tick(new Risk { Delta = NewDouble(), Aggregation = "byUnd", Id = "VOD.L" });
+            risks.Tick(new Risk { Delta = NewDouble(), Aggregation = "byUnd", Id = "MSFT" });
+            risks.Tick(new Risk { Delta = NewDouble(), Aggregation = "byPos", Id = "00001" });
+            risks.Tick(new Risk { Delta = NewDouble(), Aggregation = "byPos", Id = "00002" });
+            risks.Tick(new Risk { Delta = NewDouble(), Aggregation = "byUnd", Id = "ORCL" });
+            risks.Tick(new Risk { Delta = NewDouble(), Aggregation = "byPos", Id = "00001" });
 
             Assert.AreEqual(3, byUndList.Count);
             Assert.AreEqual(3, byPosList.Count);
@@ -103,6 +105,11 @@ namespace ReactiveLinq
             Assert.AreEqual(2, called);
             Assert.AreEqual(1, calledUnd);
             Assert.AreEqual(1, calledPos);
+        }
+
+        private int NewDouble()
+        {
+            return _rnd.Next(0, 1000);
         }
 
         [Test]
@@ -144,6 +151,49 @@ namespace ReactiveLinq
             risks.Tick();
             spots.Tick();
             Assert.AreEqual(3, xs.Count);
+        }
+
+        [Test]
+        public void GroupByAndSum()
+        {
+            var q = from risk in risks
+                    group risk by risk.Underlying into g
+                    select new { g.Key, Value = g.Sum() };
+
+            var byUndList = new Dictionary<string, Risk>();
+  
+            q.Subscribe(item => byUndList.Add(item.Key, item.Value));
+
+            risks.Tick(new Risk { Id = "0001", Underlying = "VOD.L", Delta = 1.0 });
+            risks.Tick(new Risk { Id = "0002", Underlying = "ORCL", Delta = 1.0 });
+
+            Assert.AreEqual(2, byUndList.Count);
+            Assert.AreEqual(1, byUndList["ORCL"].Delta);
+            Assert.AreEqual(1, byUndList["VOD.L"].Delta);
+
+            risks.Tick(new Risk { Id = "0003", Underlying = "MSFT", Delta = 1.0 });
+            risks.Tick(new Risk { Id = "0004", Underlying = "VOD.L", Delta = 1.0 });
+            risks.Tick(new Risk { Id = "0005", Underlying = "ORCL", Delta = 1.0 });
+            risks.Tick(new Risk { Id = "0006", Underlying = "MSFT", Delta = 1.0 });
+            risks.Tick(new Risk { Id = "0007", Underlying = "VOD.L", Delta = 1.0 });
+
+            Assert.AreEqual(3, byUndList.Count);
+            Assert.AreEqual(2, byUndList["ORCL"].Delta);
+            Assert.AreEqual(2, byUndList["MSFT"].Delta);
+            Assert.AreEqual(3, byUndList["VOD.L"].Delta);
+        }
+
+        
+    }
+
+
+    public static class Extensions
+    {
+        public static Risk Sum(this IObservable<Risk> risk)
+        {
+            var total = new AggregatedRisk();
+            risk.Subscribe(value => total += value);
+            return total;
         }
     }
 }

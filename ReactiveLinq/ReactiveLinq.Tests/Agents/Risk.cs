@@ -19,16 +19,7 @@ namespace ReactiveLinq.Agents
     {
         public string Aggregation = "";
         public string Id = "";
-        private readonly double _delta;
-
-        public Risk(double delta)
-        {
-            _delta = delta;
-        }
-
-        public override string ToString()
-        {
-            return string.Format("ID:{0}\tDelta{1}", Id, _delta);
-        }
+        public string Underlying = "";
+        public double Delta;
     }
 }
