@@ -13,32 +13,29 @@
 
 #endregion
 
-using System;
 using System.Collections.Generic;
+using System.Linq;
+using ReactiveLinq.Agents;
 
 namespace ReactiveLinq.Agents
 {
-    public class RiskAgent : IObservable<Risk>
-    {        
-        private readonly Random _rnd = new Random();
-        private readonly List<IObserver<Risk>> _observers = new List<IObserver<Risk>>();
+    public class AggregatedRisk : Risk
+    {
+        private readonly Dictionary<string, Risk> _items = new Dictionary<string, Risk>();
 
-        public IDisposable Subscribe(IObserver<Risk> observer)
+        public static AggregatedRisk operator+(AggregatedRisk left, Risk right)
         {
-            _observers.Add(observer);
-            return new DisposeAction(() => _observers.Remove(observer));
+            left.Add(right);
+            return left;
         }
 
-        public void Tick()
+        private void Add(Risk risk)
         {
-            foreach (var observer in _observers)
-                observer.OnNext(new Risk{ Delta = _rnd.Next(0, 1000) });
-        }
-
-        public void Tick(Risk risk)
-        {
-            foreach (var observer in _observers)
-                observer.OnNext(risk);
-        }
+            _items[risk.Id] = risk;
+            Delta = _items
+                .Select(item => item.Value.Delta)
+                .Aggregate((x, y) => x + y);
+            Underlying = risk.Underlying;
+        } 
     }
 }

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agents\DisposeAction.cs" />
+    <Compile Include="Agents\AggregatedRisk.cs" />
     <Compile Include="CSReactiveLinqTests.cs" />
     <Compile Include="FSReactiveLinqTests.cs" />
     <Compile Include="ReactiveLinqTests.cs" />
