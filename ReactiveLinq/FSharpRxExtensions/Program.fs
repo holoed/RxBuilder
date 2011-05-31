@@ -17,6 +17,6 @@ let rx = rxBuilder()
 let rec f x = rx { yield x 
                    yield! f (x + 1) }
 
-do f 5 |> fun xs -> Observable.ObserveOn(xs, Scheduler.CurrentThread) |> Observable.subscribe (fun x -> printfn "%A" x) |> ignore
+do f 5 |> fun xs -> Observable.ObserveOn(xs, Scheduler.CurrentThread) |> Observable.subscribe (fun x -> Console.WriteLine x) |> ignore
 
 do System.Console.ReadLine() |> ignore
