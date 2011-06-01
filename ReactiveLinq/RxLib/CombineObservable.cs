@@ -18,7 +18,7 @@ namespace RxLib
 
         public IDisposable Subscribe(IObserver<T> observer)
         {
-            var mutableDisposable = new MutableDisposable();
+            var mutableDisposable = new MutableDisposable(AssignmentBehavior.ReplaceAndDisposePrevious);
             var handle = new ManualResetEvent(false);
             Scheduler.ThreadPool.Schedule(() => ScheduleNextObservable(handle, mutableDisposable, observer));
             mutableDisposable.Disposable = _xs.Subscribe(observer.OnNext, observer.OnError, () => handle.Set());
@@ -27,8 +27,8 @@ namespace RxLib
 
         private void ScheduleNextObservable(ManualResetEvent handle, MutableDisposable mutableDisposable, IObserver<T> observer)
         {
-
             handle.WaitOne();
+            handle.Close();
             var deferObservable = (DeferObservable<T>)_ys;
             var innerObservable = deferObservable.GetInner();
             while (innerObservable is DeferObservable<T>)
