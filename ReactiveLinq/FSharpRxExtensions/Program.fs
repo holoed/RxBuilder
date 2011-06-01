@@ -2,7 +2,6 @@
 open System.Linq
 open System.Reactive.Linq
 open System.Reactive.Concurrency
-open RxLib
 
 //*************************************************************************
 // Fundamentals
