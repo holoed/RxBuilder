@@ -21,7 +21,7 @@ let append xs ys = Observable (fun obv -> xs |> subscribe obv
 
 let rec naturals n = append (unit n) (delay (fun () -> naturals (n + 1)))
 
-do (naturals 5) |> subscribe (printfn "%A")
+//do (naturals 5) |> subscribe (printfn "%A")
 
 
 //*************************************************************************
@@ -29,9 +29,13 @@ do (naturals 5) |> subscribe (printfn "%A")
 //*************************************************************************
 
 type rxBuilder() =    
-   member this.Delay f = ObservableExt.Defer f
+   member this.Delay (f : unit -> 'a IObservable) = 
+               { new IObservable<_> with
+                    member this.Subscribe obv = (f()).Subscribe obv }
    member this.Combine (xs:'a IObservable, ys: 'a IObservable) =
-               ObservableExt.Combine (xs, ys)
+               { new IObservable<_> with
+                    member this.Subscribe obv = xs.Subscribe obv ; 
+                                                ys.Subscribe obv }
    member this.Yield x = Observable.Return x
    member this.YieldFrom xs = xs
 
@@ -40,6 +44,6 @@ let rx = rxBuilder()
 let rec f x = rx { yield x 
                    yield! f (x + 1) }
 
-do f 5 |> fun xs -> Observable.ObserveOn(xs, Scheduler.CurrentThread) |> Observable.subscribe (fun x -> Console.WriteLine x) |> ignore
+do f 5 |> Observable.subscribe (fun x -> Console.WriteLine x) |> ignore
 
 do System.Console.ReadLine() |> ignore
