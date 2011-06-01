@@ -1,22 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxLib", "RxLib\RxLib.csproj", "{ABC025A0-B533-4C82-82CE-0EB3C169206F}"
-EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpRxExtensions", "FSharpRxExtensions\FSharpRxExtensions.fsproj", "{E06B1600-7314-42C8-B9EA-5EA21E42F59C}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 2
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs05
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = RxLib\\RxLib.csproj
-		SccProjectName1 = RxLib
-		SccLocalPath1 = RxLib
-		SccProjectUniqueName2 = FSharpRxExtensions\\FSharpRxExtensions.fsproj
-		SccProjectName2 = FSharpRxExtensions
-		SccLocalPath2 = FSharpRxExtensions
+		SccProjectUniqueName1 = FSharpRxExtensions\\FSharpRxExtensions.fsproj
+		SccProjectName1 = FSharpRxExtensions
+		SccLocalPath1 = FSharpRxExtensions
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,16 +22,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ABC025A0-B533-4C82-82CE-0EB3C169206F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABC025A0-B533-4C82-82CE-0EB3C169206F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABC025A0-B533-4C82-82CE-0EB3C169206F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{ABC025A0-B533-4C82-82CE-0EB3C169206F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{ABC025A0-B533-4C82-82CE-0EB3C169206F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{ABC025A0-B533-4C82-82CE-0EB3C169206F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABC025A0-B533-4C82-82CE-0EB3C169206F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ABC025A0-B533-4C82-82CE-0EB3C169206F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{ABC025A0-B533-4C82-82CE-0EB3C169206F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{ABC025A0-B533-4C82-82CE-0EB3C169206F}.Release|x86.ActiveCfg = Release|Any CPU
 		{E06B1600-7314-42C8-B9EA-5EA21E42F59C}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{E06B1600-7314-42C8-B9EA-5EA21E42F59C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{E06B1600-7314-42C8-B9EA-5EA21E42F59C}.Debug|Mixed Platforms.Build.0 = Debug|x86

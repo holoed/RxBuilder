@@ -54,11 +54,6 @@
       <HintPath>..\packages\Rx-Main.1.1.10425\lib\Net4\System.Reactive.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <ProjectReference Include="..\RxLib\RxLib.csproj">
-      <Name>RxLib</Name>
-      <Project>{abc025a0-b533-4c82-82ce-0eb3c169206f}</Project>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 	     Other similar extension points exist, see Microsoft.Common.targets.
