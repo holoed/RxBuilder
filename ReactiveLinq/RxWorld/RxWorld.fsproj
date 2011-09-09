@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1a75838c-3bb9-45d0-8130-2f94fb65313b}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>SampleUsage</RootNamespace>
-    <AssemblyName>SampleUsage</AssemblyName>
+    <ProjectGuid>{f4356848-670f-4e9a-afd0-17f6c127a17e}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RxWorld</RootNamespace>
+    <AssemblyName>RxWorld</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <Name>SampleUsage</Name>
+    <Name>RxWorld</Name>
     <SccProjectName>SAK</SccProjectName>
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
@@ -27,7 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <DocumentationFile>bin\Debug\SampleUsage.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\RxWorld.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -37,20 +37,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <DocumentationFile>bin\Release\SampleUsage.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\RxWorld.XML</DocumentationFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\FSharp\1.0\Microsoft.FSharp.Targets" Condition="!Exists('$(MSBuildBinPath)\Microsoft.Build.Tasks.v4.0.dll')" />
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildBinPath)\Microsoft.Build.Tasks.v4.0.dll')" />
   <ItemGroup>
-    <Compile Include="Program.fs" />
-    <None Include="App.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Compile Include="RxWorld.fs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Arrowheads">
-      <HintPath>..\ThirdParty\Arrowheads.dll</HintPath>
-    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core" />
     <Reference Include="PresentationCore" />
@@ -58,7 +53,12 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Reactive">
+      <HintPath>C:\Users\epentangelo\Documents\Visual Studio 2010\Projects\RxWorld\packages\Rx_Experimental-Main.1.1.10621\lib\Net4\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>

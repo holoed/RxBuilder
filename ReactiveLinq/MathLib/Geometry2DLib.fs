@@ -19,13 +19,9 @@ let angle v = atan2 v.x v.y
 let normalize v = let size = magnitude v
                   { x = v.x / size; y = v.y / size }
 
-let dot v1 v2 = let mv1 = magnitude v1
-                let mv2 = magnitude v2
-                let ang1 = angle v1
-                let ang2 = angle v2
-                let dang = if (ang1 > ang2) then ang1 - ang2 
-                                            else ang2 - ang1
-                mv1 * mv2 * cos dang
+let cross v1 v2 = (v1.x * v2.y) - (v1.y * v2.x)
+
+let dot v1 v2 = (v1.x * v2.x) + (v1.y * v2.y);
 
 let fromPolar rho theta = { x = rho * cos theta
                             y = rho * sin theta }
@@ -45,6 +41,8 @@ let getP2 s = s.p2
 let normals s = let dv = s.p2 - s.p1
                 ({ x = -dv.y; y = dv.x}, { x = dv.y; y = -dv.x })
 
+let distance v1 v2 = sqrt((v2.x - v1.x) * (v2.x - v1.x)) + ((v2.y - v1.y) * (v2.y - v1.y));
+
 let midpoint s = { x = (s.p1.x + s.p2.x) / 2.0
                    y = (s.p1.y + s.p2.y) / 2.0 }
 
@@ -60,8 +58,19 @@ let getP2X = getP2 >> getX
 
 let getP2Y = getP2 >> getY
 
-
-
-
-
-
+let distanceBetweenSegmentAndPoint s p =
+    let v = { x = s.p2.x - s.p1.x
+              y = s.p2.y - s.p1.y }
+    let w = { x = p.x - s.p1.x
+              y = p.y - s.p1.y }
+    let c1 = dot w v
+    let c2 = dot v v
+    if (c1 <= 0. ) then
+        distance p s.p1
+    elif (c2 <= c1) then
+        distance p s.p2
+    else
+        let b = c1 / c2
+        let pb = { x = s.p1.x + b * v.x 
+                   y = s.p1.y + b * v.y }
+        distance p pb

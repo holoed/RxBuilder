@@ -33,7 +33,7 @@ let mp = midpoint s
 
 let (v1, v2) = normals s
 
-let velocity = fromPolar 100.0 (toRad -30.0<deg>) 
+let velocity = fromPolar 100.0 (toRad 60.0<deg>) 
 
 let vs1 = segment mp (v1 + mp)
 
@@ -45,6 +45,10 @@ let bounceVel = bounce velocity v2
 
 let bvs = segment mp (mp +  bounceVel)
 
+let p = vector 170.0 185.0
+
+let distanceToSegment = distanceBetweenSegmentAndPoint s p
+
 drawLine s (Brushes.Red)
 
 drawArrow vs1 (Brushes.Blue)
@@ -54,6 +58,8 @@ drawArrow vs2 (Brushes.Green)
 drawArrow velocityArrow (Brushes.Black)
 
 drawArrow bvs (Brushes.Coral)
+
+drawLine (segment p (p * 1.01)) (Brushes.Red)
  
 let window = new Window(Title = "WpfApplication1", Content = canvas)
 [<STAThread>] ignore <| (new Application()).Run window
