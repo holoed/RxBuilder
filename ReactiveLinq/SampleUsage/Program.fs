@@ -1,5 +1,4 @@
-﻿
-// Learn more about F# at http://fsharp.net
+﻿// Learn more about F# at http://fsharp.net
 // F# for WPF project template at http://code.msdn.com/fs
 // Template Version 0.1 Preview
 open System
@@ -13,41 +12,42 @@ open Geometry2DLib
 
 let canvas = new Canvas()
 
-let drawLine segment color = canvas.Children.Add (new Line (X1 = getP1X segment, 
-                                                            Y1 = getP1Y segment, 
-                                                            X2 = getP2X segment, 
-                                                            Y2 = getP2Y segment, 
+let drawLine segment color = canvas.Children.Add (new Line (X1 = Segment.p1x segment, 
+                                                            Y1 = Segment.p1y segment, 
+                                                            X2 = Segment.p2x segment, 
+                                                            Y2 = Segment.p2y segment, 
                                                             Stroke = color, 
                                                             StrokeThickness = 5.0 )) |> ignore
 
-let drawArrow segment color = canvas.Children.Add (new ArrowLine (X1 = getP1X segment, 
-                                                                  Y1 = getP1Y segment, 
-                                                                  X2 = getP2X segment, 
-                                                                  Y2 = getP2Y segment, 
+let drawArrow segment color = canvas.Children.Add (new ArrowLine (X1 = Segment.p1x segment, 
+                                                                  Y1 = Segment.p1y segment, 
+                                                                  X2 = Segment.p2x segment, 
+                                                                  Y2 = Segment.p2y segment, 
                                                                   Stroke = color, 
                                                                   StrokeThickness = 5.0 )) |> ignore
 
-let s = segment (vector 100.0 150.0) (vector 200.0 200.0)
+let s = Segment.create (Vector.create 100.0 150.0) 
+                       (Vector.create 200.0 200.0)
 
-let mp = midpoint s
+let mp = Segment.midpoint s
 
-let (v1, v2) = normals s
+let (v1, v2) = Segment.normals s
 
-let velocity = fromPolar 100.0 (toRad 60.0<deg>) 
+let velocity = Vector.fromPolar 100.0 (degToRad 60.0<deg>) 
 
-let vs1 = segment mp (v1 + mp)
+let vs1 = Segment.create mp (v1 + mp)
 
-let vs2 = segment mp (v2 + mp)
+let vs2 = Segment.create mp (v2 + mp)
 
-let velocityArrow = segment (mp - velocity) mp 
+let velocityArrow = Segment.create (mp - velocity) mp 
 
-let bounceVel = bounce velocity v2
+let bounceVel = Vector.bounce velocity v2
 
-let bvs = segment mp (mp +  bounceVel)
+let bvs = Segment.create mp (mp +  bounceVel)
 
-let p = vector 170.0 185.0
+let p = Vector.create 170.0 185.0
 
-let distanceToSegment = distanceBetweenSegmentAndPoint s p
+let distanceToSegment = Segment.distanceBetweenSegmentAndPoint s p
 
 drawLine s (Brushes.Red)
 
@@ -59,7 +59,7 @@ drawArrow velocityArrow (Brushes.Black)
 
 drawArrow bvs (Brushes.Coral)
 
-drawLine (segment p (p * 1.01)) (Brushes.Red)
+drawLine (Segment.create p (p * 1.01)) (Brushes.Red)
  
 let window = new Window(Title = "WpfApplication1", Content = canvas)
 [<STAThread>] ignore <| (new Application()).Run window

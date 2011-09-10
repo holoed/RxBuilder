@@ -18,4 +18,4 @@ let cos (x:float<rad>) = Math.Cos (x / 1.<rad>)
 
 let atan2 x y = Math.Atan2(x, y) * 1.<rad>
 
-let toRad (a:float<deg>) = (a / 180.0<deg>) * pi
+let degToRad (a:float<deg>) = (a / 180.0<deg>) * pi
