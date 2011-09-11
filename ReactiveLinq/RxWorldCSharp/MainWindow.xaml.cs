@@ -30,7 +30,8 @@ namespace RxWorldCSharp
         private static void UpdateViewModel(World current, World newWorld)
         {
             current.Robot.Size = newWorld.Robot.Size;
-            current.Robot.Position = newWorld.Robot.Position;                                    
+            current.Robot.Position1 = newWorld.Robot.Position1;
+            current.Robot.Position2 = newWorld.Robot.Position2;                                    
         }
 
         private static World ConvertToViewModel(RxWorld.World arg)
@@ -40,7 +41,8 @@ namespace RxWorldCSharp
                            Robot = new Robot
                                        {
                                            Size = new Size(arg.robot.size.Item1, arg.robot.size.Item2),
-                                           Position = new Point(arg.robot.pos.Item1, arg.robot.pos.Item2)                                           
+                                           Position1 = new Point(Geometry2DLib.Vector.x(Geometry2DLib.Segment.p1(arg.robot.pos)), Geometry2DLib.Vector.y(Geometry2DLib.Segment.p1(arg.robot.pos))),                                          
+                                           Position2 = new Point(Geometry2DLib.Vector.x(Geometry2DLib.Segment.p2(arg.robot.pos)), Geometry2DLib.Vector.y(Geometry2DLib.Segment.p2(arg.robot.pos)))                                           
                                        }
                        };
         }
@@ -57,13 +59,25 @@ namespace RxWorldCSharp
                   OnPropertyChanged("Size");}
         }
 
-        private Point _position;
-        public Point Position
+        private Point _position1;
+        public Point Position1
         {
-            get { return _position; }
-            set {if (value == _position) return;
-                _position = value;
-                  OnPropertyChanged("Position");}
+            get { return _position1; }
+            set {if (value == _position1) return;
+                _position1 = value;
+                  OnPropertyChanged("Position1");}
+        }
+
+        private Point _position2;
+        public Point Position2
+        {
+            get { return _position2; }
+            set
+            {
+                if (value == _position2) return;
+                _position2 = value;
+                OnPropertyChanged("Position2");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
