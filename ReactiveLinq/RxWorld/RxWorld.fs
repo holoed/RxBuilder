@@ -19,7 +19,7 @@ let obstacles = [Segment.create (Vector.create 100. 500.) (Vector.create 200. 60
                  Segment.create (Vector.create 500. 100.) (Vector.create 600. 200.)
                  Segment.create (Vector.create 200. 100.) (Vector.create 100. 200.)]
 
-let initialState f = { size = f; robot = { size = (10.0, 10.0); pos = Segment.create (Vector.create 150.0 300.0) (Vector.create 150.0 300.0); direction = 90.<deg> ; speed = 10. }; obstacles = obstacles }
+let initialState f = { size = f; robot = { size = (10.0, 10.0); pos = Segment.create (Vector.create 150.0 300.0) (Vector.create 150.0 300.0); direction = 90.<deg> ; speed = 20. }; obstacles = obstacles }
 
 
 let livingRobot { size = f; robot = r } =
@@ -32,16 +32,16 @@ let livingRobot { size = f; robot = r } =
 
     let distanceToObstacles = List.map (fun obstacle -> (obstacle, Segment.distanceBetweenSegmentAndPoint obstacle pos)) obstacles
 
-    let (newDirection, newSpeed) = 
-        let hitObstacle = List.tryFind (fun (_, d) -> d < 50.) distanceToObstacles
-        if (hitObstacle.IsSome) then 
-            let (Some (obstacle, _)) = hitObstacle
-            let (v1, v2) = Segment.normals obstacle
-            let bounceVel = Vector.bounce (Vector.fromPolar r.speed (degToRad r.direction)) v2
-            let newAngle = Vector.angle bounceVel            
-            (newAngle, r.speed)
-        else 
-            (degToRad r.direction, r.speed)
+    let (newDirection, newSpeed) =         
+                match (List.tryFind (fun (_, d) -> d < 50.) distanceToObstacles) with
+                | Some (obstacle, _) ->
+                        let (v1, v2) = Segment.normals obstacle
+                        let bounceVel = Vector.bounce 1.0 (Vector.fromPolar r.speed (degToRad r.direction)) v2
+                        let newAngle = Vector.angle bounceVel            
+                        let newSpeed = Vector.magnitude bounceVel
+                        (newAngle, newSpeed)
+                | None ->
+                    (degToRad r.direction, r.speed)
                         
     { r with pos = Segment.create (Vector.create (vx + r.speed * (cos newDirection)) (vy + r.speed * (sin newDirection)))
                                   (Vector.create (vx + (r.speed + 50.) * (cos newDirection)) (vy + (r.speed + 50.) * (sin newDirection)))

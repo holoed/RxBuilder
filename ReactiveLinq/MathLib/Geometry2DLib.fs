@@ -32,9 +32,9 @@ module Vector =
 
     let y v = v.y
 
-    let bounce v n = let n = normalize n
-                     let d = dot n v
-                     - 2.0 * (d * n) + v
+    let bounce b v n = let n = normalize n
+                       let d = dot n v
+                       b * (- 2.0 * (d * n) + v)
 module Segment =
 
     open Vector

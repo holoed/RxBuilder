@@ -18,6 +18,7 @@ namespace RxWorldCSharp
         {
             InitializeComponent();
             RxWorld.Run(() => Tuple.Create(canvasWorld.ActualWidth, canvasWorld.ActualHeight), ConvertToViewModel).ObserveOnDispatcher().Subscribe(UpdateView());
+            
         }
 
         private Action<World> UpdateView()
