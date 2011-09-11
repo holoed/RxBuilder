@@ -6,7 +6,7 @@ using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Geometry2DLib;
+using Geometry2D;
 
 namespace RxWorldCSharp
 {
