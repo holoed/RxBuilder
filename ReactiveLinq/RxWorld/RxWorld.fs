@@ -12,12 +12,15 @@ type Size = double * double
 
 type Robot = { size : Size; pos : Segment; direction: float<deg>; speed: double }
 
-type World = { size : unit -> Size; robot : Robot }
+type World = { size : unit -> Size; robot : Robot; obstacles : Segment list }
 
-let initialState f = { size = f; robot = { size = (10.0, 10.0); pos = Segment.create (Vector.create 150.0 5.0) (Vector.create 150.0 5.0); direction = 90.<deg> ; speed = 10. } }
+let obstacles = [Segment.create (Vector.create 100. 500.) (Vector.create 200. 600.);
+                 Segment.create (Vector.create 600. 500.) (Vector.create 500. 600.)
+                 Segment.create (Vector.create 500. 100.) (Vector.create 600. 200.)
+                 Segment.create (Vector.create 200. 100.) (Vector.create 100. 200.)]
 
-let obstacles = [Segment.create (Vector.create 100. 100.) (Vector.create 200. 200.);
-                 Segment.create (Vector.create 600. 100.) (Vector.create 500. 200.)]
+let initialState f = { size = f; robot = { size = (10.0, 10.0); pos = Segment.create (Vector.create 150.0 300.0) (Vector.create 150.0 300.0); direction = 90.<deg> ; speed = 10. }; obstacles = obstacles }
+
 
 let livingRobot { size = f; robot = r } =
     let (w, h) = f() 
@@ -48,7 +51,7 @@ let livingRobot { size = f; robot = r } =
 // live : World -> World
 let livingWorld w = { w with robot = livingRobot w }
 
-let Run (g:Func<Size>, f:Func<_,'b>) = timer (TimeSpan.FromSeconds 1.0) (TimeSpan.FromSeconds (1./10.)) 
+let Run (g:Func<Size>, f:Func<_,'b>) = timer (TimeSpan.FromSeconds 1.0) (TimeSpan.FromSeconds (1./30.)) 
                                           |> Observable.scan (fun x _ -> livingWorld x) (initialState (fun () -> g.Invoke()))
                                           |> Observable.map (fun x -> f.Invoke(x))
 
