@@ -6,8 +6,6 @@
                            X1="{Binding Path=Robot.Position1.X}" 
                            Y1="{Binding Path=Robot.Position1.Y}"
                            X2="{Binding Path=Robot.Position2.X}"
-                           Y2="{Binding Path=Robot.Position2.Y}"/>
-        <Line X1="100" Y1="100" X2="200" Y2="200" Stroke="Red" StrokeThickness="5" />
-        <Line X1="600" Y1="100" X2="500" Y2="200" Stroke="Red" StrokeThickness="5" />
+                           Y2="{Binding Path=Robot.Position2.Y}"/>       
     </Canvas>
 </Window>

@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace RxWorldCSharp
 {
@@ -21,9 +25,21 @@ namespace RxWorldCSharp
             return x =>
                        {
                            if (DataContext == null)
+                           {
                                DataContext = x;
-                           else 
-                               UpdateViewModel((World) DataContext, x);
+                               foreach (var obstacle in x.Obstacles)
+                                   canvasWorld.Children.Add(new Line
+                                                                {
+                                                                    X1 = obstacle.P1.X,
+                                                                    Y1 = obstacle.P1.Y,
+                                                                    X2 = obstacle.P2.X,
+                                                                    Y2 = obstacle.P2.Y,
+                                                                    Stroke = Brushes.Red,
+                                                                    StrokeThickness = 5
+                                                                });
+                           }
+                           else
+                               UpdateViewModel((World)DataContext, x);
                        };
         }
 
@@ -38,6 +54,11 @@ namespace RxWorldCSharp
         {
             return new World
                        {
+                           Obstacles = arg.obstacles.Select(x => new Obstacle
+                                                                     {
+                                                                         P1 = new Point(Geometry2DLib.Segment.p1x.Invoke(x), Geometry2DLib.Segment.p1y.Invoke(x)),
+                                                                         P2 = new Point(Geometry2DLib.Segment.p2x.Invoke(x), Geometry2DLib.Segment.p2y.Invoke(x)), 
+                                                                     }).ToList(),
                            Robot = new Robot
                                        {
                                            Size = new Size(arg.robot.size.Item1, arg.robot.size.Item2),
@@ -91,6 +112,13 @@ namespace RxWorldCSharp
 
     public class World 
     {     
-        public Robot Robot { get; set; }           
+        public Robot Robot { get; set; }
+        public List<Obstacle> Obstacles { get; set; }  
+    }
+
+    public class Obstacle
+    {
+        public Point P1 { get; set; }
+        public Point P2 { get; set; }
     }
 }
