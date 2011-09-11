@@ -16,7 +16,7 @@ module Vector =
 
     let magnitude v = sqrt (v.x * v.x + v.y * v.y)
 
-    let angle v = atan2 v.x v.y
+    let angle v = atan2 v.y v.x
 
     let normalize v = let size = magnitude v
                       { x = v.x / size; y = v.y / size }

@@ -1,11 +1,13 @@
 ﻿<Window x:Class="RxWorldCSharp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="400" Width="600">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Media2D="clr-namespace:Petzold.Media2D;assembly=Arrowheads" Title="MainWindow" Height="400" Width="600">
     <Canvas x:Name="canvasWorld">
-        <Ellipse Fill="Black"            
-                 Width="{Binding Path=Robot.Size.Width}" Height="{Binding Path=Robot.Size.Height}"      
-                 Canvas.Left="{Binding Path=Robot.Position.X}" Canvas.Top="{Binding Path=Robot.Position.Y}"/>
-        <Line X1="100" Y1="150" X2="200" Y2="200" Stroke="Red" StrokeThickness="5" />
+        <Media2D:ArrowLine Stroke="Black" StrokeThickness="5"       
+                           X1="{Binding Path=Robot.Position1.X}" 
+                           Y1="{Binding Path=Robot.Position1.Y}"
+                           X2="{Binding Path=Robot.Position2.X}"
+                           Y2="{Binding Path=Robot.Position2.Y}"/>
+        <Line X1="100" Y1="100" X2="200" Y2="200" Stroke="Red" StrokeThickness="5" />
+        <Line X1="600" Y1="100" X2="500" Y2="200" Stroke="Red" StrokeThickness="5" />
     </Canvas>
 </Window>
