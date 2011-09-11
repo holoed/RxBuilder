@@ -41,7 +41,7 @@ let vs2 = Segment.create mp (v2 + mp)
 
 let velocityArrow = Segment.create (mp - velocity) mp 
 
-let bounceVel = Vector.bounce velocity v2
+let bounceVel = Vector.bounce 0.5 velocity v2
 
 let bvs = Segment.create mp (mp +  bounceVel)
 
