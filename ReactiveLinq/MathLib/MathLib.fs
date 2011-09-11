@@ -14,17 +14,14 @@ module Math =
     //  pi : float<deg>
     let pi = Math.PI * 1.<rad>
 
-    //  sqrt : float -> float
-    let sqrt = Math.Sqrt
-
     //  sin : float<rad> -> float
-    let sin x = Math.Sin (x / 1.<rad>)
+    let sin x = sin (x / 1.<rad>)
 
     //  cos : float<rad> -> float
-    let cos x = Math.Cos (x / 1.<rad>)
+    let cos x = cos (x / 1.<rad>)
 
     //  atan2 : float -> float -> float<rad>
-    let atan2 x y = Math.Atan2(x, y) * 1.<rad>
+    let atan2 x y = (atan2 x y) * 1.<rad>
 
     //  degToRad : float<deg> -> float<rad>
     let degToRad (a:float<deg>) = (a * pi) / 180.<deg>
