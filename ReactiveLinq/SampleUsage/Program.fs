@@ -7,8 +7,7 @@ open System.Windows.Controls
 open System.Windows.Shapes
 open System.Windows.Media
 open Petzold.Media2D
-open MathLib
-open Geometry2DLib
+open Geometry2D
 
 let canvas = new Canvas()
 

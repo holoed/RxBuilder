@@ -3,8 +3,7 @@
 open System
 open System.Windows
 open RxLib
-open MathLib
-open Geometry2DLib
+open Geometry2D
 open Segments
 open Vectors
 
