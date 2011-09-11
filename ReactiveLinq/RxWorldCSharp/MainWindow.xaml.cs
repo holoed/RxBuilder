@@ -6,13 +6,14 @@ using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Geometry2DLib;
 
 namespace RxWorldCSharp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
@@ -57,14 +58,14 @@ namespace RxWorldCSharp
                        {
                            Obstacles = arg.obstacles.Select(x => new Obstacle
                                                                      {
-                                                                         P1 = new Point(Geometry2DLib.Segment.p1x.Invoke(x), Geometry2DLib.Segment.p1y.Invoke(x)),
-                                                                         P2 = new Point(Geometry2DLib.Segment.p2x.Invoke(x), Geometry2DLib.Segment.p2y.Invoke(x)), 
+                                                                         P1 = new Point(Segments.p1x.Invoke(x), Segments.p1y.Invoke(x)),
+                                                                         P2 = new Point(Segments.p2x.Invoke(x), Segments.p2y.Invoke(x)), 
                                                                      }).ToList(),
                            Robot = new Robot
                                        {
                                            Size = new Size(arg.robot.size.Item1, arg.robot.size.Item2),
-                                           Position1 = new Point(Geometry2DLib.Vector.x(Geometry2DLib.Segment.p1(arg.robot.pos)), Geometry2DLib.Vector.y(Geometry2DLib.Segment.p1(arg.robot.pos))),                                          
-                                           Position2 = new Point(Geometry2DLib.Vector.x(Geometry2DLib.Segment.p2(arg.robot.pos)), Geometry2DLib.Vector.y(Geometry2DLib.Segment.p2(arg.robot.pos)))                                           
+                                           Position1 = new Point(Vectors.x(Segments.p1(arg.robot.pos)), Vectors.y(Segments.p1(arg.robot.pos))),                                          
+                                           Position2 = new Point(Vectors.x(Segments.p2(arg.robot.pos)), Vectors.y(Segments.p2(arg.robot.pos)))                                           
                                        }
                        };
         }

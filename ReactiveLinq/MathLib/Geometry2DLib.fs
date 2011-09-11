@@ -1,16 +1,16 @@
-﻿module Geometry2DLib
+﻿namespace Geometry2DLib
 
 open System
 open MathLib
 
-module Vector =
+type Vector  = 
+        private { x: float; y: float } 
+        static member (+) (v1, v2) = { x = v1.x + v2.x; y = v1.y + v2.y }
+        static member (-) (v1, v2) = { x = v1.x - v2.x; y = v1.y - v2.y }
+        static member (*) (k, v) = { x = v.x * k; y = v.y * k }
+        static member (*) (v, k) = { x = v.x * k; y = v.y * k }
 
-    type Vector = 
-            private { x:float; y:float } 
-            static member (+) (v1, v2) = { x = v1.x + v2.x; y = v1.y + v2.y }
-            static member (-) (v1, v2) = { x = v1.x - v2.x; y = v1.y - v2.y }
-            static member (*) (k, v) = { x = v.x * k; y = v.y * k }
-            static member (*) (v, k) = { x = v.x * k; y = v.y * k }
+module Vectors =
 
     let create x y = { x = x; y = y }
 
@@ -35,12 +35,13 @@ module Vector =
     let bounce b v n = let n = normalize n
                        let d = dot n v
                        b * (- 2.0 * (d * n) + v)
-module Segment =
 
-    open Vector
+type Segment = private { p1: Vector; p2 : Vector }
 
-    type Segment = private { p1: Vector; p2 : Vector }
-                
+module Segments =
+
+    open Vectors
+                    
     let create p1 p2 = { p1 = p1; p2 = p2 }
 
     let p1 s = s.p1
@@ -48,11 +49,11 @@ module Segment =
     let p2 s = s.p2
 
     let normals s = let dv = s.p2 - s.p1
-                    (Vector.create (- y dv) (x dv), Vector.create (y dv) (- x dv))
+                    (Vectors.create (- y dv) (x dv), Vectors.create (y dv) (- x dv))
 
     let distance v1 v2 = sqrt((x v2 - x v1) * (x v2 - x v1)) + ((y v2 - y v1) * (y v2 - y v1));
 
-    let midpoint s = Vector.create ((x s.p1 + x s.p2) / 2.0) ((y s.p1 + y s.p2) / 2.0)
+    let midpoint s = Vectors.create ((x s.p1 + x s.p2) / 2.0) ((y s.p1 + y s.p2) / 2.0)
 
     let p1x = p1 >> x
 
@@ -63,8 +64,8 @@ module Segment =
     let p2y = p2 >> y
 
     let distanceBetweenSegmentAndPoint s p =
-        let v = Vector.create (x s.p2 - x s.p1) (y s.p2 - y s.p1)
-        let w = Vector.create (x p - x s.p1) (y p - y s.p1)
+        let v = Vectors.create (x s.p2 - x s.p1) (y s.p2 - y s.p1)
+        let w = Vectors.create (x p - x s.p1) (y p - y s.p1)
         let c1 = dot w v
         let c2 = dot v v
         if (c1 <= 0. ) then
@@ -73,5 +74,5 @@ module Segment =
             distance p s.p2
         else
             let b = c1 / c2
-            let pb = Vector.create (x s.p1 + b * x v) (y s.p1 + b * y v)
+            let pb = Vectors.create (x s.p1 + b * x v) (y s.p1 + b * y v)
             distance p pb
