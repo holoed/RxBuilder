@@ -2,7 +2,7 @@
 
 open System
 open System.Windows
-open RxLib
+open FSharpReactiveExtensions
 open Geometry2D
 open Segments
 open Vectors
@@ -50,7 +50,7 @@ let livingRobot { size = f; robot = r } =
 // live : World -> World
 let livingWorld w = { w with robot = livingRobot w }
 
-let Run (g:Func<Size>, f:Func<_,'b>) = timer (TimeSpan.FromSeconds 1.0) (TimeSpan.FromSeconds (1./30.)) 
+let Run (g:Func<Size>, f:Func<_,'b>) = Observable.timer (TimeSpan.FromSeconds 1.0) (TimeSpan.FromSeconds (1./30.)) 
                                           |> Observable.scan (fun x _ -> livingWorld x) (initialState (fun () -> g.Invoke()))
                                           |> Observable.map (fun x -> f.Invoke(x))
 

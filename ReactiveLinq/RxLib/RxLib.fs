@@ -1,4 +1,4 @@
-﻿module RxLib
+﻿namespace FSharpReactiveExtensions
 
 open System
 open System.Linq
@@ -24,13 +24,38 @@ type rxBuilder() =
     member this.YieldFrom xs = xs
     member this.Zero () = Observable.Empty()
               
-let rx = rxBuilder()
+module Observable = 
 
-// Rx combinators
+    let rx = rxBuilder()
 
-let repeat (xs:IObservable<_>) = xs.Repeat()
+    // Rx combinators
 
-let timer (dueTime:TimeSpan) (period:TimeSpan) = Observable.Timer (dueTime, period)
+    // unit :: 'a -> IObservable<'a>
+    let unit = Observable.Return
 
-let startWith = Observable.StartWith
+    //  repeat : IObservable<'a> -> IObservable<'a>
+    let repeat (xs:IObservable<_>) = xs.Repeat()
+
+    //  timer : TimeSpan -> TimeSpan -> IObservable<int64>
+    let timer (dueTime:TimeSpan) (period:TimeSpan) = Observable.Timer (dueTime, period)
+
+    //  startWith : IObservable<'a> -> IObservable<'a>
+    let startWith = Observable.StartWith
+
+    // timeStamp :: IObservable<'a> -> IObservable<Timestamped<'a>>
+    let timeStamp = Observable.Timestamp
+
+    // zip :: IObservable<'a> -> IObservable<'b> -> ('a -> 'b -> 'c) -> 'IObservable<'c>
+    let zip (xs : IObservable<_>) (ys : IObservable<_>) f = Observable.Zip(xs, ys, new Func<_,_,_>(f))
+
+    // skip :: IObservable<'a> -> int -> IObservable<'a>
+    let skip xs i = Observable.Skip (xs, i)
+
+    let liftM f xs = rx { let! x = xs
+                          return f x }
+
+    let liftM2 f xs ys = rx { let! x = xs
+                              let! y = ys
+                              return f x y }
+
 
